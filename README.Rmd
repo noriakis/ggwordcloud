@@ -22,6 +22,16 @@ knitr::opts_chunk$set(
 ```
 
 # Modified to accept `use_shadowtext` and `bg.colour` arguments to use shadowtext in wordclouds
+```{r}
+set.seed(42)
+library(ggwordcloud)
+data("love_words_small")
+ggplot(love_words_small, aes(label = word, size = speakers)) +
+    geom_text_wordcloud(use_shadowtext=TRUE, bg.colour="grey80") +
+    scale_size_area(max_size = 40) +
+    theme_minimal()
+```
+
 
 # ggwordcloud <img src="man/figures/logo.png" align="right" height=140/>
  

@@ -1,6 +1,21 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+# Modified to accept `use_shadowtext` and `bg.colour` arguments to use shadowtext in wordclouds
+
+``` r
+set.seed(42)
+library(ggwordcloud)
+#> Loading required package: ggplot2
+data("love_words_small")
+ggplot(love_words_small, aes(label = word, size = speakers)) +
+    geom_text_wordcloud(use_shadowtext=TRUE, bg.colour="grey80") +
+    scale_size_area(max_size = 40) +
+    theme_minimal()
+```
+
+<img src="man/figures/README-unnamed-chunk-1-1.png" width="700" style="display: block; margin: auto;" />
+
 # ggwordcloud <img src="man/figures/logo.png" align="right" height=140/>
 
 [![Travis build
@@ -43,7 +58,6 @@ Because sometimes, pictures are better than a thousand words…
 
 ``` r
 library(ggwordcloud)
-#> Loading required package: ggplot2
 data("love_words_small")
 set.seed(42)
 ggplot(love_words_small, aes(label = word, size = speakers)) +
@@ -52,7 +66,7 @@ ggplot(love_words_small, aes(label = word, size = speakers)) +
   theme_minimal()
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="700" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="700" style="display: block; margin: auto;" />
 
 ``` r
 data("love_words")
@@ -76,10 +90,11 @@ ggplot(
   scale_size_area(max_size = 40) +
   theme_minimal() +
   scale_color_gradient(low = "darkred", high = "red")
+#> Warning in wordcloud_boxes(data_points = points_valid_first, boxes = boxes, :
 #> Some words could not fit on page. They have been removed.
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="700" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="700" style="display: block; margin: auto;" />
 
 ``` r
 library(dplyr, quietly = TRUE, warn.conflicts = FALSE)
@@ -97,7 +112,7 @@ ggplot(
   facet_wrap(~type)
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="700" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="700" style="display: block; margin: auto;" />
 
 ``` r
 set.seed(42)
@@ -108,6 +123,6 @@ ggplot(love_words_small, aes(label = word, size = speakers,
   theme_minimal()
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="700" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="700" style="display: block; margin: auto;" />
 
 More examples are available in the vignette.
