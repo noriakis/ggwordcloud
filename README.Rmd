@@ -21,6 +21,8 @@ knitr::opts_chunk$set(
 )
 ```
 
+# Modified to accept `use_shadowtext` and `bg.colour` arguments to use shadowtext in wordclouds
+
 # ggwordcloud <img src="man/figures/logo.png" align="right" height=140/>
  
 [![Travis build status](https://travis-ci.org/lepennec/ggwordcloud.svg?branch=master)](https://travis-ci.org/lepennec/ggwordcloud)
