@@ -210,7 +210,7 @@ geom_text_wordcloud_area <- function(mapping = NULL, data = NULL,
                                      inherit.aes = TRUE,
                                      show_boxes = FALSE,
                                      use_richtext = TRUE,
-                                     use_shadowtext = TRUE,
+                                     use_shadowtext = FALSE,
                                      bg.colour="white") {
   if (!missing(nudge_x) || !missing(nudge_y)) {
     if (!missing(position)) {

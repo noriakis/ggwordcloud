@@ -67,7 +67,7 @@ geom_text_wordcloud_area(
   inherit.aes = TRUE,
   show_boxes = FALSE,
   use_richtext = TRUE,
-  use_shadowtext = TRUE,
+  use_shadowtext = FALSE,
   bg.colour = "white"
 )
 }
