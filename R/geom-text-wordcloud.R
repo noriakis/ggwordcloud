@@ -122,7 +122,8 @@ geom_text_wordcloud <- function(mapping = NULL, data = NULL,
                                 show_boxes = FALSE,
                                 use_richtext = TRUE,
                                 use_shadowtext = FALSE,
-                                bg.colour="white") {
+                                bg.colour="white",
+                                bg.r = 0.1) {
   if (!missing(nudge_x) || !missing(nudge_y)) {
     if (!missing(position)) {
       stop("You must specify either `position` or `nudge_x`/`nudge_y`.", call. = FALSE)
@@ -177,6 +178,7 @@ geom_text_wordcloud <- function(mapping = NULL, data = NULL,
       use_richtext = use_richtext,
       use_shadowtext = use_shadowtext,
       bg.colour=bg.colour,
+      bg.r=bg.r,
       ...
     )
   )
@@ -211,7 +213,8 @@ geom_text_wordcloud_area <- function(mapping = NULL, data = NULL,
                                      show_boxes = FALSE,
                                      use_richtext = TRUE,
                                      use_shadowtext = FALSE,
-                                     bg.colour="white") {
+                                     bg.colour="white",
+                                     bg.r=0.1) {
   if (!missing(nudge_x) || !missing(nudge_y)) {
     if (!missing(position)) {
       stop("You must specify either `position` or `nudge_x`/`nudge_y`.", call. = FALSE)
@@ -266,6 +269,7 @@ geom_text_wordcloud_area <- function(mapping = NULL, data = NULL,
       use_richtext = use_richtext,
       use_shadowtext = use_shadowtext,
       bg.colour=bg.colour,
+      bg.r=bg.r,
       ...
     )
   )
@@ -336,7 +340,8 @@ GeomTextWordcloud <- ggproto("GeomTextWordcloud", Geom,
                         show_boxes = FALSE,
                         use_richtext = TRUE,
                         use_shadowtext = FALSE,
-                        bg.colour="white") {
+                        bg.colour="white",
+                        bg.r=0.1) {
     lab <- data$label
     lab[!is.na(data$label_content)] <- data$label_content[!is.na(data$label_content)]
     if (parse) {
@@ -381,6 +386,7 @@ GeomTextWordcloud <- ggproto("GeomTextWordcloud", Geom,
       use_richtext = use_richtext,
       use_shadowtext = use_shadowtext,
       bg.colour = bg.colour,
+      bg.r=bg.r,
       cl = "textwordcloudtree",
       name = "geom_text_wordcloud"
     )
@@ -511,7 +517,7 @@ makeContent.textwordcloudtree <- function(x) {
            boxes_text, boxes, wordcloud)
   }
 
-  grobs <- lapply(seq_along(valid_strings), make_textgrob, x, valid_strings, wordcloud, x$use_richtext, x$use_shadowtext, x$bg.colour)
+  grobs <- lapply(seq_along(valid_strings), make_textgrob, x, valid_strings, wordcloud, x$use_richtext, x$use_shadowtext, x$bg.colour, x$bg.r)
   class(grobs) <- "gList"
 
   setChildren(x, grobs)
@@ -887,7 +893,7 @@ compute_boxes_from_mask <- function(mask, gw_ratio, gh_ratio, grid_size, max_gri
   mask_lists
 }
 
-make_textgrob <- function(i, x, valid_strings, wordcloud, use_richtext, use_shadowtext, bg.colour) {
+make_textgrob <- function(i, x, valid_strings, wordcloud, use_richtext, use_shadowtext, bg.colour, bg.r) {
   xi <- valid_strings[i]
   row <- x$data[xi, , drop = FALSE]
 
@@ -908,7 +914,8 @@ make_textgrob <- function(i, x, valid_strings, wordcloud, use_richtext, use_shad
       vjust = x$data$vjust[i],
       use_richtext = use_richtext,
       use_shadowtext = use_shadowtext,
-      bg.colour = bg.colour
+      bg.colour = bg.colour,
+      bg.r=bg.r
   )
 }
 
@@ -936,7 +943,8 @@ text_grob <- function(
   gp = gpar(),
   use_richtext = TRUE,
   use_shadowtext = FALSE,
-  bg.colour = "white") {
+  bg.colour = "white",
+  bg.r=0.1) {
 
   if (is.na(x)|is.na(y)) {
    nullGrob()
@@ -950,7 +958,8 @@ text_grob <- function(
           hjust = hjust,
           vjust = vjust,
           gp = gp,
-          bg.colour = bg.colour
+          bg.colour = bg.colour,
+          bg.r=bg.r
         )
     } else {
       if (!use_richtext) {

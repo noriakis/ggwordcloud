@@ -35,7 +35,8 @@ geom_text_wordcloud(
   show_boxes = FALSE,
   use_richtext = TRUE,
   use_shadowtext = FALSE,
-  bg.colour = "white"
+  bg.colour = "white",
+  bg.r = 0.1
 )
 
 geom_text_wordcloud_area(
@@ -68,7 +69,8 @@ geom_text_wordcloud_area(
   show_boxes = FALSE,
   use_richtext = TRUE,
   use_shadowtext = FALSE,
-  bg.colour = "white"
+  bg.colour = "white",
+  bg.r = 0.1
 )
 }
 \arguments{
