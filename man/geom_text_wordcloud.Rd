@@ -34,8 +34,7 @@ geom_text_wordcloud(
   inherit.aes = TRUE,
   show_boxes = FALSE,
   use_richtext = TRUE,
-  use_shadowtext = FALSE,
-  bg.colour = "white",
+  bg.colour = NULL,
   bg.r = 0.1
 )
 
@@ -68,8 +67,7 @@ geom_text_wordcloud_area(
   inherit.aes = TRUE,
   show_boxes = FALSE,
   use_richtext = TRUE,
-  use_shadowtext = FALSE,
-  bg.colour = "white",
+  bg.colour = NULL,
   bg.r = 0.1
 )
 }
@@ -165,9 +163,9 @@ to \code{TRUE}. Default to \code{FALSE}.}
 \item{use_richtext}{use the enhanced gridtext text grob instead of the grid one. Allow to
 use markdown/html syntax in label. Default to \code{TRUE}.}
 
-\item{use_shadowtext}{use shadow text. Default to \code{FALSE}.}
-
 \item{bg.colour}{background color to be used in shadowtext.}
+
+\item{bg.r}{background ratio}
 }
 \value{
 a ggplot
