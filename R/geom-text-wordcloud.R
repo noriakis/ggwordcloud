@@ -950,7 +950,7 @@ text_grob <- function(
    nullGrob()
   } else {
     if (use_shadowtext) {
-        shadowtextGrob(
+        shadowtext::shadowtextGrob(
           text,
           x, y,
           default.units = default.units,
@@ -984,60 +984,5 @@ text_grob <- function(
         )
       }
     }
-  }
-}
-
-# Copied from:
-
-# Adapted from shadowtext, at the time of writing located at:
-# https://github.com/GuangchuangYu/shadowtext/blob/325d25919b28ccd4184c6363c11c8c26e822dd95/R/shadowtext-grob.R#L28
-# This function was modified to always return a gList,
-# whether bg.colour is NA or not.
-# Each background textgrob is made to have a unique name, otherwise
-# it can mess up the plotting order.
-shadowtextGrob <- function(
-  label, x = unit(0.5, "npc"), y = unit(0.5, "npc"),
-  hjust = NULL, vjust = NULL, rot = 0, check.overlap = FALSE,
-  default.units = "npc", name = NULL, gp = gpar(col="white"), vp = NULL,
-  bg.colour = "black", bg.r = 0.1
-) {
-  upperGrob <- textGrob(
-    label = label, x = x, y = y, hjust = hjust,
-    vjust = vjust, rot = rot, default.units = default.units,
-    check.overlap = check.overlap, name = name, gp = gp, vp = vp
-  )
-  if (is.na(bg.colour)) {
-    gList(upperGrob)
-  } else {
-    gp$col <- bg.colour
-
-    theta <- seq(pi/8, 2*pi, length.out=16)
-    char <- "X"
-    # char <- substring(label[1], 1, 1)
-    r <- bg.r[1]
-
-    if (!is.unit(x)) {
-      x <- unit(x, default.units)
-    }
-    if (!is.unit(y)) {
-      y <- unit(y, default.units)
-    }
-
-    bgList <- lapply(theta, function(i) {
-      x <- x + unit(cos(i) * r, "strheight", data = char)
-      y <- y + unit(sin(i) * r, "strheight", data = char)
-      textGrob(
-        label = label, x = x, y = y, hjust = hjust,
-        vjust = vjust, rot = rot, default.units = default.units,
-        check.overlap = check.overlap, name = paste0(name, "-shadowtext", i),
-        gp = gp, vp = vp
-      )
-    })
-
-
-    bgGrob <- do.call(gList, bgList)
-    grobs <- gList(bgGrob, upperGrob)
-    gTree(children = grobs)
-
   }
 }
