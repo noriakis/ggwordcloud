@@ -935,7 +935,7 @@ text_grob <- function(
   if (is.na(x)|is.na(y)) {
    nullGrob()
   } else {
-    if (!use_richtext) {
+    if (!use_richtext | !is.null(bg.colour)) {
       shadowtext::shadowtextGrob(
         text,
         x, y,
